@@ -14,27 +14,29 @@
 #include <stdio.h>
 #include <fcntl.h>
 
+char	*get_line()
+
 char	*get_next_line(int fd)
 {
 	char	*buff;
+	char	c;
+	int		i;
 	int		rc;
 
+	if (fd == -1)
+		return (NULL);
 	buff = malloc(BUFFER_SIZE + 1 * sizeof(char));
 	if (!buff)
 		return (NULL);
-	rc = read(fd, buff, BUFFER_SIZE);
-    printf("%d\n", rc);
-	if (rc == -1)
+	c = ' ';
+	i = 0;
+	while (read(fd, &c, 1) > 0 && c != '\n')
 	{
-		printf("file read error\n");
-		return (NULL);
+		buff[i] = c;
+		i++;
 	}
-	else
-	{
-		buff[rc] = '\0';
-		return (buff);
-	}
-
+	buff[i] = '\0';
+	return (buff);
 }
 
 int main(void)
@@ -44,11 +46,7 @@ int main(void)
     char *s2;
 
 	fd = open("text1.txt", O_RDONLY);
-	if (fd == -1)
-	{
-		printf("file open error\n");
-		return(0);
-	}
+
 	s = get_next_line(fd);
 	printf("%s\n", s);
     s2 = get_next_line(fd);
