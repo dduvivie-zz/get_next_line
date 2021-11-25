@@ -23,6 +23,7 @@ char	*get_next_line(int fd)
 	if (!buff)
 		return (NULL);
 	rc = read(fd, buff, BUFFER_SIZE);
+    printf("%d\n", rc);
 	if (rc == -1)
 	{
 		printf("file read error\n");
@@ -40,6 +41,7 @@ int main(void)
 {
 	int	fd;
 	char *s;
+    char *s2;
 
 	fd = open("text1.txt", O_RDONLY);
 	if (fd == -1)
@@ -49,6 +51,8 @@ int main(void)
 	}
 	s = get_next_line(fd);
 	printf("%s\n", s);
+    s2 = get_next_line(fd);
+	printf("%s\n", s2);
 	close(fd);
 	return (0);
 }
