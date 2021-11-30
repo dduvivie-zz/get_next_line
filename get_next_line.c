@@ -14,43 +14,68 @@
 #include <stdio.h>
 #include <fcntl.h>
 
-char	*get_line()
+char	*set_temp_line(char *buff, char *one_line)
+{
+	static char		*temp_line;
+
+	if (!temp_line)
+		// initialize temp string
+
+	// 
+}
+
+char	*read_file(int fd, char *buff, char *one_line)
+{
+	int	rc;
+	
+	ft_bzero(buff, BUFFER_SIZE + 1);
+	rc = -1;
+	while (rc != 0 && !find_endline(buff))
+	{
+		rc = read(fd, buff, BUFFER_SIZE);
+		buff[rc] = '\0';
+		set_temp_line(buff, oneline);
+		if (rc == 0)
+		ft_bzero(buff, BUFFER_SIZE);
+	}
+	if (rc == 0)
+		// while '\n' can be found in temp_str
+		// cut the word from temp_str and return this.
+	else // if find endline in buff
+		// join the characters(include '\n') with temp_str and return the new str.
+	return (one_line);
+}
 
 char	*get_next_line(int fd)
 {
 	char	*buff;
-	char	c;
-	int		i;
-	int		rc;
+	char	*one_line;
 
 	if (fd == -1)
 		return (NULL);
-	buff = malloc(BUFFER_SIZE + 1 * sizeof(char));
+	buff = malloc((BUFFER_SIZE + 1) * sizeof(char));
 	if (!buff)
 		return (NULL);
-	c = ' ';
-	i = 0;
-	while (read(fd, &c, 1) > 0 && c != '\n')
-	{
-		buff[i] = c;
-		i++;
-	}
-	buff[i] = '\0';
-	return (buff);
+	one_line = read_file(fd, buff, one_line);
+	return (one_line);
 }
 
 int main(void)
 {
 	int	fd;
 	char *s;
-    char *s2;
+	int	finish;
 
 	fd = open("text1.txt", O_RDONLY);
-
-	s = get_next_line(fd);
-	printf("%s\n", s);
-    s2 = get_next_line(fd);
-	printf("%s\n", s2);
+	finish = 0;
+	while (!finish)
+	{
+		s = get_next_line(fd);
+		if (s == NULL)
+			finish = 1;
+		printf("%s\n", s);
+		free(s);
+	}
 	close(fd);
 	return (0);
 }
