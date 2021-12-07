@@ -16,29 +16,24 @@
 
 char	*set_temp_line(char *buff, char *one_line)
 {
-	static char		*temp_line;
-
-	if (!temp_line)
-		// initialize temp string
-
-	// 
+	 
 }
 
 char	*read_file(int fd, char *buff, char *one_line)
 {
-	int	rc;
+	int	bytes;
+	static char		*temp_line = NULL;
 	
 	ft_bzero(buff, BUFFER_SIZE + 1);
-	rc = -1;
-	while (rc != 0 && !find_endline(buff))
+	bytes = -1;
+	while (bytes != 0 && !find_endline(buff))
 	{
-		rc = read(fd, buff, BUFFER_SIZE);
-		buff[rc] = '\0';
-		set_temp_line(buff, oneline);
-		if (rc == 0)
+		bytes = read(fd, buff, BUFFER_SIZE);
+		buff[bytes] = '\0';
+		set_temp_line(buff, oneline, temp_line);
 		ft_bzero(buff, BUFFER_SIZE);
 	}
-	if (rc == 0)
+	if (bytes == 0)
 		// while '\n' can be found in temp_str
 		// cut the word from temp_str and return this.
 	else // if find endline in buff
@@ -56,26 +51,12 @@ char	*get_next_line(int fd)
 	buff = malloc((BUFFER_SIZE + 1) * sizeof(char));
 	if (!buff)
 		return (NULL);
-	one_line = read_file(fd, buff, one_line);
+	one_line = read_file(fd, buff, one_line); // get the return value
 	return (one_line);
 }
 
-int main(void)
-{
-	int	fd;
-	char *s;
-	int	finish;
 
-	fd = open("text1.txt", O_RDONLY);
-	finish = 0;
-	while (!finish)
-	{
-		s = get_next_line(fd);
-		if (s == NULL)
-			finish = 1;
-		printf("%s\n", s);
-		free(s);
-	}
-	close(fd);
-	return (0);
-}
+// TODO
+// if the file is empty, stop with first read()
+// if BUFFER_SIZE is 0
+// if BUFFER_SIZE is too big
