@@ -10,6 +10,12 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "get_next_line.h"
+
+/*
+Writes 'n' zeroed bytes to the string 's'.
+If 'n' is zero, bzero() does nothing.
+*/
 void	ft_bzero(void *s, size_t n)
 {
 	unsigned char	*str;
@@ -22,13 +28,34 @@ void	ft_bzero(void *s, size_t n)
 	}
 }
 
-int	get_line_len(char *str)
-{
-	int	len;
+/*
+If the second parameter (flag) is 0, get the length of the string 's'.
+If the second parameter (flag) is 1, get the length of one line, which means
+that the counter stop at '\n' in 's'.
 
-	while (*str != '\n')
+*/
+size_t	ft_strlen(const char *s, int flag)
+{
+	size_t	len;
+
+	len = 0;
+	if (flag == 0)
+	{
+		while (*s != '\0')
+		{
+			len++;
+			s++;
+		}	
+	}
+	else
+	{
+		while (*s != '\n')
+		{
+			len++;
+			s++;
+		}
 		len++;
-	len++;
+	}
 	return (len);
 }
 
@@ -47,7 +74,7 @@ char	*ft_strjoin(char const *s1, char const *s2)
 
 	if (!s1 || !s2)
 		return (NULL);
-	len = (ft_strlen(s1) + ft_strlen(s2) + 1);
+	len = (ft_strlen(s1, 0) + ft_strlen(s2, 0) + 1);
 	i = 0;
 	str = malloc(len * sizeof(char));
 	if (!str)
@@ -69,7 +96,8 @@ char	*ft_strjoin(char const *s1, char const *s2)
 }
 
 /*
-This function checks if there is a '\n' in the string which was read by read().
+This function checks if there is a '\n' in the string 
+which was given as parameter.
 */
 int	find_endline(char *str)
 {
@@ -90,7 +118,7 @@ char	*ft_strdup(const char *s1)
 	int		i;
 
 	i = 0;
-	s2 = malloc((ft_strlen(s1) + 1) * sizeof(char));
+	s2 = malloc((ft_strlen(s1, 0) + 1) * sizeof(char));
 	if (!s2)
 		return (0);
 	while (s1[i] != '\0')
