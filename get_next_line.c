@@ -86,11 +86,13 @@ char	*read_file(int fd, char *buff, char *one_line)
 			ft_bzero(buff, BUFFER_SIZE);
 		}
 	}
-	if (bytes == 0 && !find_endline(temp_line))
-		return(temp_line);
-	one_line = get_one_line(temp_line, one_line);
-	temp_line = reset_temp_line(temp_line);
-	return (one_line);
+	if (bytes == 0)
+	{
+		if (find_endline(temp_line))
+		{
+			one_line = get_one_line(temp_line, one_line);
+			temp_line = reset_temp_line(temp_line);
+			return (one_line);
 		}
 	}
 	else
