@@ -101,6 +101,8 @@ which was given as parameter.
 */
 int	find_endline(char *str)
 {
+	if (str == NULL)
+		return (0);
 	while (*str != '\0' && *str != '\n')
 		str++;
 	if (*str == '\0')
