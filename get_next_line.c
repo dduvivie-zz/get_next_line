@@ -33,9 +33,12 @@ char	*set_temp_line(char *buff, char *temp_line)
 	}
 	else
 	{
-		cpy_temp_line = temp_line;
-		temp_line = ft_strjoin(temp_line, buff);
-		free(cpy_temp_line);    //  <------------------------------ the problem
+		cpy_temp_line = ft_strdup(temp_line);
+		printf("1: %s\n", cpy_temp_line);
+		free(temp_line);
+		temp_line = ft_strjoin(cpy_temp_line, buff);
+		printf("2: %s\n", temp_line);
+		free(cpy_temp_line);
 	}
 	return (temp_line);
 }

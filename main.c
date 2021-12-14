@@ -18,31 +18,14 @@ int	main(void)
 	char	*s;
 
 	fd = open("text1.txt", O_RDONLY);
-	// Kuzuha
+	
 	s = get_next_line(fd);
-	printf("%s\n", s);
-	free(s);
-
-	// Kanae
-	s = get_next_line(fd);
-	printf("%s\n", s);
-	free(s);
-
-	// Kenmochi
-	s = get_next_line(fd);
-	printf("%s\n", s);
-	free(s);
-
-	// Kagami
-	s = get_next_line(fd);
-	printf("%s\n", s);
-	free(s);
-
-	// Minato
-	s = get_next_line(fd);
-	printf("%s\n", s);
-	free(s);
-
+	while (s != NULL)
+	{
+		printf("%s\n", s);
+		free(s);
+		s = get_next_line(fd);
+	}
 	close(fd);
 	system("leaks a.out >> .leaks_log.txt");
 	return (0);
