@@ -27,6 +27,6 @@ int	main(void)
 		s = get_next_line(fd);
 	}
 	close(fd);
-	system("leaks a.out >> .leaks_log.txt");
+	system("leaks a.out > .leaks_log.txt");
 	return (0);
 }

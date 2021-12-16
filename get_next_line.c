@@ -107,7 +107,7 @@ char	*get_next_line(int fd)
 	char	*one_line;
 	static char		*static_line = NULL;
 
-	if (fd > -1 || BUFFER_SIZE == 0)
+	if (fd <= -1 || BUFFER_SIZE == 0)
 		return (NULL);
 	buff = malloc((BUFFER_SIZE + 1) * sizeof(char));
 	if (!buff)
