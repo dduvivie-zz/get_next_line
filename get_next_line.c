@@ -15,10 +15,14 @@
 char	*reset_temp_line(char *temp_line)
 {
 	int		char_cut;
+	char	*tmp;
 
 	char_cut = ft_strlen(temp_line, 1);
-	temp_line += char_cut;
-	return (temp_line);
+	tmp = ft_strdup(temp_line + char_cut);
+	if (!tmp)
+		return(NULL);
+	free(temp_line);
+	return (tmp);
 }
 
 char	*set_temp_line(char *buff, char *temp_line)
@@ -34,11 +38,11 @@ char	*set_temp_line(char *buff, char *temp_line)
 	else
 	{
 		cpy_temp_line = ft_strdup(temp_line);
-		printf("1: %s\n", cpy_temp_line);
 		free(temp_line);
+		temp_line = NULL;
 		temp_line = ft_strjoin(cpy_temp_line, buff);
-		printf("2: %s\n", temp_line);
 		free(cpy_temp_line);
+		cpy_temp_line = NULL;
 	}
 	return (temp_line);
 }
@@ -54,6 +58,7 @@ char	*get_one_line(char *temp_line, char *one_line)
 	if (!one_line)
 	{
 		free(temp_line);
+		temp_line = NULL;
 		return (NULL);
 	}
 	while (*temp_line != '\n')
@@ -102,7 +107,7 @@ char	*get_next_line(int fd)
 	char	*one_line;
 	static char		*static_line = NULL;
 
-	if (fd == -1 || BUFFER_SIZE == 0)
+	if (fd > -1 || BUFFER_SIZE == 0)
 		return (NULL);
 	buff = malloc((BUFFER_SIZE + 1) * sizeof(char));
 	if (!buff)
