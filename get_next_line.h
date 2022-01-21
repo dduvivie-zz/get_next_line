@@ -17,6 +17,15 @@
 # include <stdlib.h>
 # include <fcntl.h>
 # include <stdio.h>
+# include <limits.h>
+
+/*
+**  if the user does not provide a buffer_size at compalation, set default value
+*/
+
+# ifndef BUFFER_SIZE
+#  define BUFFER_SIZE 256
+# endif
 
 char	*get_next_line(int fd);
 void	ft_bzero(void *s, size_t n);

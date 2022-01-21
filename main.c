@@ -12,21 +12,36 @@
 
 #include "get_next_line.h"
 
-int	main(void)
+void	print_gnl(char *s)
+{
+	if (s == NULL)
+		printf("NULL\n");
+	else
+		printf("%s\n", s);
+}
+
+/*
+**	gcc -Wall -Wextra -Werror -g -D BUFFER_SIZE=1 get_next_line.c get_next_line_utils.c main.c
+*/
+
+int	main()
 {
 	int		fd;
 	char	*s;
-
-	fd = open("text1.txt", O_RDONLY);
+		
+	fd = open("gnlTester/files/nl", O_RDONLY);
 	
 	s = get_next_line(fd);
+	if (s == NULL)
+		printf("NULL\n");
 	while (s != NULL)
 	{
-		printf("%s\n", s);
+		print_gnl(s);
 		free(s);
 		s = get_next_line(fd);
 	}
 	close(fd);
 	system("leaks a.out > .leaks_log.txt");
+	
 	return (0);
 }
