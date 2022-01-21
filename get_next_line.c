@@ -23,7 +23,7 @@ char	*reset_temp_line(char *temp_line)
 		char_cut = ft_strlen(temp_line, 0);
 	new_tmp = ft_strdup(temp_line + char_cut);
 	if (!new_tmp)
-		return(NULL);
+		return (NULL);
 	free(temp_line);
 	return (new_tmp);
 }
@@ -43,23 +43,27 @@ char	*set_temp_line(char *buff, char *temp_line)
 		cpy_temp_line = ft_strdup(temp_line);
 		free(temp_line);
 		temp_line = NULL;
+		if (!cpy_temp_line)
+			return (NULL);
 		temp_line = ft_strjoin(cpy_temp_line, buff);
 		free(cpy_temp_line);
 		cpy_temp_line = NULL;
+		if (!temp_line)
+			return (NULL);
 	}
 	return (temp_line);
 }
 
 char	*get_one_line(char *temp_line, char *one_line)
 {
-	int	len;
 	int	i;
+	int	len;
 
+	i = 0;
 	if (find_endline(temp_line))
 		len = ft_strlen(temp_line, 1);
 	else
 		len = ft_strlen(temp_line, 0);
-	i = 0;
 	one_line = malloc((len + 1) * sizeof(char));
 	if (!one_line)
 	{
@@ -67,15 +71,10 @@ char	*get_one_line(char *temp_line, char *one_line)
 		temp_line = NULL;
 		return (NULL);
 	}
-	while (*temp_line != '\n' && *temp_line != '\0')
+	while (i != len)
 	{
 		one_line[i] = *temp_line;
 		temp_line++;
-		i++;
-	}
-	if(*temp_line == '\n')
-	{
-		one_line[i] = *temp_line;
 		i++;
 	}
 	one_line[i] = '\0';
@@ -113,8 +112,8 @@ char	*read_file(int fd, char *buff, char *one_line, char **temp_line)
 
 char	*get_next_line(int fd)
 {
-	char	*buff;
-	char	*one_line;
+	char			*buff;
+	char			*one_line;
 	static char		*static_line = NULL;
 
 	if (fd < 0 || fd >= OPEN_MAX || BUFFER_SIZE == 0)
@@ -133,9 +132,3 @@ char	*get_next_line(int fd)
 	free(buff);
 	return (one_line);
 }
-
-/*
----- TODO -------
-
-
-*/

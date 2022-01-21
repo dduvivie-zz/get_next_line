@@ -21,16 +21,15 @@ void	print_gnl(char *s)
 }
 
 /*
-**	gcc -Wall -Wextra -Werror -g -D BUFFER_SIZE=1 get_next_line.c get_next_line_utils.c main.c
+gcc -Wall -Wextra -Werror -g -D BUFFER_SIZE=1 get_next_line.c get_next_line_utils.c main.c
 */
 
-int	main()
+int	main(void)
 {
 	int		fd;
 	char	*s;
 		
 	fd = open("gnlTester/files/41_with_nl", O_RDONLY); 
-	
 	s = get_next_line(fd);
 	if (s == NULL)
 		printf("NULL\n");
@@ -42,6 +41,5 @@ int	main()
 	}
 	close(fd);
 	system("leaks a.out > .leaks_log.txt");
-	
 	return (0);
 }
