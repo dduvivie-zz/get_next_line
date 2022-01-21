@@ -29,7 +29,7 @@ int	main()
 	int		fd;
 	char	*s;
 		
-	fd = open("gnlTester/files/nl", O_RDONLY);
+	fd = open("gnlTester/files/41_with_nl", O_RDONLY); 
 	
 	s = get_next_line(fd);
 	if (s == NULL)

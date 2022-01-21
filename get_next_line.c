@@ -20,7 +20,7 @@ char	*reset_temp_line(char *temp_line)
 	if (find_endline(temp_line))
 		char_cut = ft_strlen(temp_line, 1);
 	else
-		char_cut = ft_strlen(temp_line, 0) - 1;
+		char_cut = ft_strlen(temp_line, 0);
 	new_tmp = ft_strdup(temp_line + char_cut);
 	if (!new_tmp)
 		return(NULL);
@@ -58,7 +58,7 @@ char	*get_one_line(char *temp_line, char *one_line)
 	if (find_endline(temp_line))
 		len = ft_strlen(temp_line, 1);
 	else
-		len = ft_strlen(temp_line, 0) - 1;
+		len = ft_strlen(temp_line, 0);
 	i = 0;
 	one_line = malloc((len + 1) * sizeof(char));
 	if (!one_line)
@@ -97,14 +97,17 @@ char	*read_file(int fd, char *buff, char *one_line, char **temp_line)
 		if (!*temp_line)
 			return (NULL);
 	}
-	if (*temp_line == NULL || ft_strlen(*temp_line, 0) == 0)								// file is empty
+	if (*temp_line == NULL || ft_strlen(*temp_line, 0) == 0)
 		return (NULL);
 	one_line = get_one_line(*temp_line, one_line);
 	*temp_line = reset_temp_line(*temp_line);
 	if (!*temp_line)
 		return (NULL);
 	if (ft_strlen(*temp_line, 0) == 0)
+	{
 		free(*temp_line);
+		*temp_line = NULL;
+	}
 	return (one_line);
 }
 
