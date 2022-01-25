@@ -6,7 +6,7 @@
 /*   By: dduvivie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/18 17:37:54 by dduvivie          #+#    #+#             */
-/*   Updated: 2021/11/18 17:37:56 by dduvivie         ###   ########.fr       */
+/*   Updated: 2022/01/25 14:04:25 by dduvivie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,8 @@ If the second parameter (flag) is 0, get the length of the string 's'.
 If the second parameter (flag) is 1, get the length of one line, which means
 that the counter stop at '\n' in 's'.
 
+"01234\0" --> 5
+"01234\n012..." --> 6
 */
 size_t	ft_strlen(const char *s, int flag)
 {
@@ -97,7 +99,8 @@ char	*ft_strjoin(char const *s1, char const *s2)
 
 /*
 This function checks if there is a '\n' in the string 
-which was given as parameter.
+which was given as parameter 'str'.
+Return True(1) or False(0).
 */
 int	find_endline(char *str)
 {

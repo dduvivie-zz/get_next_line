@@ -6,7 +6,7 @@
 /*   By: dduvivie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/18 17:38:08 by dduvivie          #+#    #+#             */
-/*   Updated: 2021/11/18 17:38:12 by dduvivie         ###   ########.fr       */
+/*   Updated: 2022/01/25 14:04:33 by dduvivie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@
 # include <limits.h>
 
 /*
-**  if the user does not provide a buffer_size at compalation, set default value
+**  if the user does not provide a buffer_size at compilation, set default value
 */
 
 # ifndef BUFFER_SIZE
