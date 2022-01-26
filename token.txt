@@ -1,1 +1,6 @@
 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
+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
+
+cc -Wall -Wextra -Werror -g -D BUFFER_SIZE=1 get_next_line.c get_next_line_utils.c main.c
+
+
