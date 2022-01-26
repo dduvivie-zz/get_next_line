@@ -34,4 +34,3 @@ char	*ft_strjoin(char const *s1, char const *s2);
 int		find_endline(char *str);
 char	*ft_strdup(const char *s1);
 #endif
-

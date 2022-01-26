@@ -142,10 +142,8 @@ char	*get_next_line(int fd)
 	char			*buff;
 	char			*one_line;
 	static char		*static_lines[OPEN_MAX];
-    int             i;
 
-	i = -1;
-    if (fd < 0 || fd >= OPEN_MAX || BUFFER_SIZE == 0)
+	if (fd < 0 || fd >= OPEN_MAX || BUFFER_SIZE == 0)
 		return (NULL);
 	buff = malloc((BUFFER_SIZE + 1) * sizeof(char));
 	if (!buff)
@@ -157,10 +155,7 @@ char	*get_next_line(int fd)
 	}
 	ft_bzero(buff, BUFFER_SIZE + 1);
 	one_line = NULL;
-    //while (++i != OPEN_MAX)
-    //    static_lines[i] = NULL;
 	one_line = read_file(fd, buff, one_line, &static_lines[fd]);
 	free(buff);
 	return (one_line);
 }
-
